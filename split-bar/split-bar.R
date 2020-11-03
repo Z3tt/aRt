@@ -32,8 +32,9 @@ img_df <- as.data.frame.table(img_array) %>%
   )
 
 ggplot(img_df) +
-  geom_rect(aes(xmin = x, xmax = x + bf, ymin = y, ymax = y + 0.85), fill = "#28a87d", color = NA) +
+  geom_rect(aes(xmin = x, xmax = x + bf, ymin = y, ymax = y + 0.85, fill = bf), color = NA) +
   scale_y_reverse() +
+  scale_fill_viridis_c(option = "inferno", direction = -1) +
   scale_size(range = c(0, 1.4)) +
   coord_fixed() +
   theme_minimal() +
@@ -43,11 +44,10 @@ ggplot(img_df) +
         panel.background = element_rect(color = "grey90", fill = "grey90"),
         plot.background = element_rect(color = "grey70", fill = "grey70")) +
   theme(legend.position = "none") +
-  ggsave("split-bar/plots/cedric_bars.png", width = 4.6, height = 5)
+  ggsave("split-bar/plots/cedric_bars_color.png", width = 4.6, height = 5)
 
 ggplot(img_df) +
-  geom_rect(aes(xmin = x, xmax = x + bf, ymin = y, ymax = y + 0.85), fill = "#28a87d", color = NA) +
-  geom_point(aes(x, y, size = -b), color = "#28a87d") +
+  geom_point(aes(x, y, size = bf), color = "#28a87d") +
   scale_y_reverse() +
   scale_size(range = c(0, 1.4)) +
   coord_fixed() +
@@ -61,8 +61,7 @@ ggplot(img_df) +
   ggsave("split-bar/plots/cedric_dots_filled.png", width = 4.6, height = 5)
 
 ggplot(img_df) +
-  #geom_rect(aes(xmin = x, xmax = x + bf, ymin = y, ymax = y + 0.85), fill = "#28a87d", color = NA) +
-  geom_point(aes(x, y, size = -b), color = "#28a87d", shape = 21, fill = "transparent") +
+  geom_point(aes(x, y, size = bf), color = "#28a87d", shape = 21, fill = "transparent") +
   scale_y_reverse() +
   scale_size(range = c(0, 1.4)) +
   coord_fixed() +
@@ -74,3 +73,20 @@ ggplot(img_df) +
         plot.background = element_rect(color = "grey70", fill = "grey70")) +
   theme(legend.position = "none") +
   ggsave("split-bar/plots/cedric_dots_outline.png", width = 4.6, height = 5)
+
+ggplot(img_df) +
+  geom_point(aes(x, y, size = bf, color = bf)) +
+  #geom_point(aes(x, y, size = -b, color = -b), shape = 21, fill = "transparent") +
+  scale_y_reverse() +
+  #rcartocolor::scale_color_carto_c(palette = "Earth") +
+  scale_color_viridis_c(option = "inferno", direction = -1) +
+  scale_size(range = c(0, 1.4)) +
+  coord_fixed() +
+  theme_minimal() +
+  theme(axis.text = element_blank(), 
+        axis.title = element_blank(), 
+        panel.grid = element_blank(),
+        panel.background = element_rect(color = "grey70", fill = "grey70"),
+        plot.background = element_rect(color = "grey90", fill = "grey90")) +
+  theme(legend.position = "none") +
+  ggsave("split-bar/plots/cedric_dots_filled_color_Viridis2.png", width = 4.6, height = 5)
